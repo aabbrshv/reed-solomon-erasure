@@ -19,7 +19,7 @@ extern crate rand;
 
 extern crate smallvec;
 
-#[cfg(feature = "simd-accel")]
+#[cfg(feature = "never-trigger")]
 extern crate libc;
 
 use ::core::iter;
