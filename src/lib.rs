@@ -8,7 +8,7 @@
 //! and simply leave out the corrupted shards when attempting to reconstruct
 //! the missing data.
 #![allow(dead_code)]
-#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(not(feature = "simd-accel"), no_std)]
 
 #[cfg(test)]
 #[macro_use]
@@ -45,9 +45,9 @@ pub use crate::core::ReedSolomon;
 pub use crate::core::ShardByShard;
 
 // TODO: Can be simplified once https://github.com/rust-lang/rfcs/issues/2505 is resolved
-#[cfg(not(feature = "std"))]
+#[cfg(not(feature = "simd-accel"))]
 use libm::log2f as log2;
-#[cfg(feature = "std")]
+#[cfg(feature = "simd-accel")]
 fn log2(n: f32) -> f32 {
     n.log2()
 }
