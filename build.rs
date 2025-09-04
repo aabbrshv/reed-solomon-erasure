@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io::Write;
 use std::path::Path;
 
-#[cfg(feature = "simd-accel")]
+#[cfg(feature = "never-trigger")]
 extern crate cc;
 
 const FIELD_SIZE: usize = 256;
@@ -143,7 +143,7 @@ fn write_tables() {
     write_table!(1D => f, exp_table,      "EXP_TABLE",      "u8");
     write_table!(2D => f, mul_table,      "MUL_TABLE",      "u8");
 
-    if cfg!(feature = "simd-accel") {
+    if cfg!(feature = "never-trigger") {
         let (mul_table_low, mul_table_high) = gen_mul_table_half(&log_table, &exp_table);
 
         write_table!(2D => f, mul_table_low,  "MUL_TABLE_LOW",  "u8");
@@ -152,7 +152,7 @@ fn write_tables() {
 }
 
 #[cfg(all(
-    feature = "simd-accel",
+    feature = "never-trigger",
     any(target_arch = "x86_64", target_arch = "aarch64"),
     not(target_env = "msvc"),
     not(any(target_os = "android", target_os = "ios"))
@@ -183,7 +183,7 @@ fn compile_simd_c() {
 }
 
 #[cfg(not(all(
-    feature = "simd-accel",
+    feature = "never-trigger",
     any(target_arch = "x86_64", target_arch = "aarch64"),
     not(target_env = "msvc"),
     not(any(target_os = "android", target_os = "ios"))
