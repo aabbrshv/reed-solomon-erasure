@@ -43,7 +43,7 @@ impl core::fmt::Display for Error {
     }
 }
 
-#[cfg(feature = "std")]
+#[cfg(feature = "simd-accel")]
 impl std::error::Error for Error {
     fn description(&self) -> &str {
         self.to_string()
@@ -73,7 +73,7 @@ impl core::fmt::Display for SBSError {
     }
 }
 
-#[cfg(feature = "std")]
+#[cfg(feature = "simd-accel")]
 impl std::error::Error for SBSError {
     fn description(&self) -> &str {
         self.to_string()
