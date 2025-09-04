@@ -13,9 +13,9 @@ use crate::matrix::Matrix;
 
 use lru::LruCache;
 
-#[cfg(feature = "std")]
+#[cfg(feature = "simd-accel")]
 use parking_lot::Mutex;
-#[cfg(not(feature = "std"))]
+#[cfg(not(feature = "simd-accel"))]
 use spin::Mutex;
 
 use super::Field;
